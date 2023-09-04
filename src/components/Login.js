@@ -5,13 +5,19 @@ import { auth } from "../utiles/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile,
   // GoogleAuthProvider,signInWithRedirect,getRedirectResult
 } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utiles/userSlice";
 
 const Login = () => {
-  
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch=useDispatch();
+
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
@@ -36,7 +42,22 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+          updateProfile(user, {
+            displayName: name?.current?.value,
+            photoURL: "https://cdna.artstation.com/p/assets/images/images/051/972/706/large/dimas-bhakti-3.jpg?1658649632",
+          })
+            .then(() => {
+              // Profile updated!
+              // ...
+              const {uid,email,displayName,photoURL} = auth.currentUser;
+              dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}));
+              navigate("/browse");
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+              // An error occurred
+              // ...
+            });
           // ...
         })
         .catch((error) => {
@@ -54,7 +75,8 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
+          navigate("/browse");
+
           // ...
         })
         .catch((error) => {
