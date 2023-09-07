@@ -1,13 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { auth } from "../utiles/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utiles/userSlice";
-import { LOGO } from "../utiles/constants";
+import { LOGO, supportedLanguages } from "../utiles/constants";
+import { toggleGptSearchView } from "../utiles/gptSlice";
+import { changeLanguage } from "../utiles/configSlice";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
+  const showLangOptions = useSelector((store) => store.gpt.showGptSearch);
+
+  const lang = useRef();
 
   const Navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,13 +55,43 @@ const Header = () => {
       });
   };
 
+  const handleGptSearchClick = () => {
+    dispatch(toggleGptSearchView());
+  };
+
+  const handleLanguageChange = () => {
+    dispatch(changeLanguage(lang.current.value));
+  };
+
   return (
     <div className="w-screen h-16 absolute bg-gradient-to-b from-black z-40 flex justify-between">
-   <img className="w-40 mx-2" src={LOGO} alt="logo" />
+      <img className="w-40 mx-2" src={LOGO} alt="logo" />
 
       {user && (
         <div className="flex">
-          <img className="w-12 h-12 my-2 cursor-pointer mr-6" src={user?.photoURL} alt="usericon" onClick={handleSignout} />
+          {showLangOptions && (
+            <select
+              className="m-4 mx-2 px-2 bg-black text-white rounded-lg"
+              ref={lang}
+              onClick={handleLanguageChange}
+            >
+              {supportedLanguages.map((lang) => (
+                <option key={lang.identifier}>{lang.name}</option>
+              ))}
+            </select>
+          )}
+          <button
+            className="bg-green-950 text-white text-opacity-60 font-bold px-2 m-2 rounded-xl"
+            onClick={handleGptSearchClick}
+          >
+            {showLangOptions ? "Home Page" : "GPT Search"}
+          </button>
+          <img
+            className="w-12 h-12 my-2 cursor-pointer mr-6"
+            src={user?.photoURL}
+            alt="usericon"
+            onClick={handleSignout}
+          />
           {/* <button
             className="p-1 m-2  bg-red-700 w-auto mr-6"
             onClick={handleSignout}
