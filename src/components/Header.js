@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from "react";
 import { auth } from "../utiles/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utiles/userSlice";
-import { LOGO, supportedLanguages } from "../utiles/constants";
+import { LOGO, SUPPORTED_LANGUAGES } from "../utiles/constants";
 import { toggleGptSearchView } from "../utiles/gptSlice";
 import { changeLanguage } from "../utiles/configSlice";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
-  const showLangOptions = useSelector((store) => store.gpt.showGptSearch);
+  const showLangOptions = useSelector((store) => store.gpt?.showGptSearch);
 
   const lang = useRef();
 
@@ -60,7 +60,7 @@ const Header = () => {
   };
 
   const handleLanguageChange = () => {
-    dispatch(changeLanguage(lang.current.value));
+    dispatch(changeLanguage(lang?.current?.value));
   };
 
   return (
@@ -75,8 +75,8 @@ const Header = () => {
               ref={lang}
               onClick={handleLanguageChange}
             >
-              {supportedLanguages.map((lang) => (
-                <option key={lang.identifier}>{lang.name}</option>
+              {SUPPORTED_LANGUAGES?.map((lang) => (
+                <option key={lang?.identifier}>{lang?.name}</option>
               ))}
             </select>
           )}
@@ -92,12 +92,6 @@ const Header = () => {
             alt="usericon"
             onClick={handleSignout}
           />
-          {/* <button
-            className="p-1 m-2  bg-red-700 w-auto mr-6"
-            onClick={handleSignout}
-          >
-            Sign out
-          </button> */}
         </div>
       )}
     </div>
