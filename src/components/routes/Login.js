@@ -1,15 +1,15 @@
 import React, { useState, useRef } from "react";
-import Header from "./Header";
-import { validate } from "../utiles/validate";
-import { auth } from "../utiles/firebase";
+import Header from "../Header";
+import { validate } from "../../utiles/validate";
+import { auth } from "../../utiles/firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { addUser } from "../utiles/userSlice";
-import { BG_IMG_URL, PHOTO_URL } from "../utiles/constants";
+import { addUser } from "../../utiles/store/userSlice";
+import { BG_IMG_URL, PHOTO_URL } from "../../utiles/constants";
 
 const Login = () => {
   const [isSignIn, setIsSignIn] = useState(true);

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utiles/constants";
-import { addTvShows } from "../utiles/movieSlice";
+import { addTvShows } from "../utiles/store/movieSlice";
 import { useEffect } from "react";
 
 const useTvShows = () => {

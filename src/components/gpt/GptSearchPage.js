@@ -1,5 +1,5 @@
 import React from "react";
-import { BG_IMG_URL } from "../utiles/constants";
+import { BG_IMG_URL } from "../../utiles/constants";
 import GptSearchBar from "./GptSearchBar";
 import GptMovieSuggestion from "./GptMovieSuggestion";
 
