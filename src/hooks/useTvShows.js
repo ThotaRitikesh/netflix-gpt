@@ -9,7 +9,7 @@ const useTvShows = () => {
 
   const getTvShows = async () => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/trending/tv/day?language=en-US",
+      "https://api.themoviedb.org/3/trending/tv/day?page=1",
       API_OPTIONS
     );
     const json = await data.json();
