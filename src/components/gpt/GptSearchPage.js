@@ -6,11 +6,11 @@ import GptMovieSuggestion from "./GptMovieSuggestion";
 const GptSearchPage = () => {
   return (
     <div>
-        <div className="absolute -z-20">
-      <img src={BG_IMG_URL} alt="bg-img" />
-        </div>
-        <GptSearchBar/>
-        <GptMovieSuggestion/>
+      <div className="fixed -z-20">
+        <img src={BG_IMG_URL} alt="bg-img" />
+      </div>
+      <GptSearchBar />
+      <GptMovieSuggestion />
     </div>
   );
 };
