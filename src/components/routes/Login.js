@@ -86,7 +86,6 @@ const Login = () => {
     }
   };
 
-
   const toggleSignIn = () => {
     setIsSignIn(!isSignIn);
     setErrorMessage(null);
@@ -95,17 +94,14 @@ const Login = () => {
   return (
     <div>
       <Header />
-      <div className="absolute">
-        <img
-          src={BG_IMG_URL}
-          alt="bg-img"
-        />
+      <div className="fixed">
+        <img className="h-screen object-cover md:h-auto" src={BG_IMG_URL} alt="bg-img" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="p-12 absolute bg-black text-white w-3/12  my-28 mx-auto left-0 right-0 bg-opacity-80"
+        className="p-12 absolute bg-black text-white w-full sm:w-2/3 lg:w-1/4 md:w-2/6  my-20 lg:my-28 mx-auto left-0 right-0 bg-opacity-80 pb-2 lg:pb-0"
       >
-        <h1 className="text-3xl my-4 font-semibold ">
+        <h1 className="text-xl md:text-3xl mb-4 font-semibold ">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignIn && (
@@ -139,7 +135,6 @@ const Login = () => {
         >
           {isSignIn ? "Sign In" : "Sign Up"}
         </button>
-        {/* <button onClick={handleGoogleLogin} className="p-2 my-4 bg-red-700 w-full font-semibold">login with google</button> */}
         <p
           className="text-xs my-2 p-2  text-zinc-300 cursor-pointer"
           onClick={toggleSignIn}

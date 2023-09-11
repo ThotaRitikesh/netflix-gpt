@@ -11,7 +11,7 @@ const MovieList = ({ title, movies, path }) => {
     movies && (
       <div className="px-6">
         <div className="flex">
-          <h1 className="text-xl py-4">{title}</h1>
+          <h1 className="text-xl md:text-2xl font-semibold py-4">{title}</h1>
           {!hideViewMore && (
             <button
               className="m-2 my-1 text-yellow-600"
