@@ -10,8 +10,10 @@ import {
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utiles/store/userSlice";
 import { BG_IMG_URL, PHOTO_URL } from "../../utiles/constants";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  const Navigate = useNavigate();
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const dispatch = useDispatch();
@@ -56,6 +58,7 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
+              Navigate("/browse");
             })
             .catch((error) => {
               setErrorMessage(error.message);
@@ -76,6 +79,7 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
+          Navigate("/browse");
           // ...
         })
         .catch((error) => {

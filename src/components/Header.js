@@ -7,6 +7,7 @@ import { addUser, removeUser } from "../utiles/store/userSlice";
 import { LOGO, SUPPORTED_LANGUAGES } from "../utiles/constants";
 import { toggleGptSearchView } from "../utiles/store/gptSlice";
 import { changeLanguage } from "../utiles/store/configSlice";
+import HeaderList from "./HeaderList";
 
 const Header = () => {
   const [isDropdownClicked, setIsDropdownClicked] = useState(false);
@@ -20,7 +21,11 @@ const Header = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
+      if (!user) {
+        // User is signed out
+        dispatch(removeUser());
+        Navigate("/");
+      } else {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const { uid, email, displayName, photoURL } = user;
@@ -32,16 +37,9 @@ const Header = () => {
             photoURL: photoURL,
           })
         );
-        Navigate("/browse");
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        dispatch(removeUser());
-        Navigate("/");
+        // Navigate("/browse");
       }
     });
-
     return () => unsubscribe();
   }, []);
 
@@ -72,29 +70,39 @@ const Header = () => {
       <div className="flex">
         <img className="w-40 mx-auto md:mx-2" src={LOGO} alt="logo" />
         {user && (
-          <ul className="text-white lg:flex gap-8 mt-5 hidden sm:hidden">
-            <li
-              className="cursor-pointer"
-              onClick={() => Navigate("/nowplaying")}
-            >
-              Now Playing
-            </li>
-            <li
-              className="cursor-pointer"
-              onClick={() => Navigate("/toprated")}
-            >
-              Top Rated
-            </li>
-            <li
-              className="cursor-pointer"
-              onClick={() => Navigate("/upcoming")}
-            >
-              UpComing Movies
-            </li>
-            <li className="cursor-pointer" onClick={() => Navigate("/tvshows")}>
-              Tv Shows
-            </li>
-          </ul>
+          // <ul className="text-white lg:flex gap-8 mt-5 hidden sm:hidden">
+          //               <li
+          //     className="cursor-pointer hover:text-red-700"
+          //     onClick={() => Navigate("/browse")}
+          //   >
+          //     Home
+          //   </li>
+          //   <li
+          //     className="cursor-pointer hover:text-red-700"
+          //     onClick={() => Navigate("/nowplaying")}
+          //   >
+          //     Now Playing
+          //   </li>
+          //   <li
+          //     className="cursor-pointer  hover:text-red-700"
+          //     onClick={() => Navigate("/toprated")}
+          //   >
+          //     Top Rated
+          //   </li>
+          //   <li
+          //     className="cursor-pointer  hover:text-red-700"
+          //     onClick={() => Navigate("/upcoming")}
+          //   >
+          //     UpComing Movies
+          //   </li>
+          //   <li
+          //     className="cursor-pointer  hover:text-red-700"
+          //     onClick={() => Navigate("/tvshows")}
+          //   >
+          //     TV Shows
+          //   </li>
+          // </ul>
+          <HeaderList />
         )}
       </div>
       {user && (
@@ -118,7 +126,7 @@ const Header = () => {
                 alt="usericon"
               />
               <span
-                className="material-symbols-outlined text-white cursor-pointer pt-5"
+                className="material-symbols-outlined text-white cursor-pointer pt-5  hover:text-red-700"
                 onClick={handleDropDown}
               >
                 expand_more
@@ -126,17 +134,17 @@ const Header = () => {
             </div>
             {isDropdownClicked && (
               <div className="bg-black m-0 md:mr-5 bg-opacity-60 ">
-                <h1 className=" text-white text-opacity-60 font-bold p-2 mx-2 rounded-xl">
+                <h1 className=" text-white text-opacity-60 font-bold p-2 mx-2 rounded-xl  hover:text-red-700">
                   {user.displayName}
                 </h1>
                 <button
-                  className=" text-white text-opacity-60 font-bold p-2 mx-2 rounded-xl"
+                  className=" text-white text-opacity-60 font-bold p-2 mx-2 rounded-xl  hover:text-red-700"
                   onClick={handleGptSearchClick}
                 >
                   {showLangOptions ? "Home Page" : "GPT Search"}
                 </button>
                 <h1
-                  className=" text-white text-opacity-60 font-bold p-2 mx-2 rounded-xl cursor-pointer"
+                  className=" text-white text-opacity-60 font-bold p-2 mx-2 rounded-xl cursor-pointer  hover:text-red-700"
                   onClick={handleSignout}
                 >
                   Sign Out

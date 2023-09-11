@@ -14,7 +14,7 @@ const MovieList = ({ title, movies, path }) => {
           <h1 className="text-xl md:text-2xl font-semibold py-4">{title}</h1>
           {!hideViewMore && (
             <button
-              className="m-2 my-1 text-yellow-600"
+              className="m-2 my-1 text-yellow-600  hover:text-red-700"
               onClick={() => Navigate(path)}
             >
               view more

@@ -6,6 +6,7 @@ import NowPlaying from "./routes/NowPlaying";
 import TopRated from "./routes/TopRated";
 import UpComing from "./routes/UpComing";
 import TvShows from "./routes/TvShows";
+import Header from "./Header";
 
 const Body = () => {
   const router = createBrowserRouter([
