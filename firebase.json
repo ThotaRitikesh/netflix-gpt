@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "netflixgpt",
+    "site": "clonenetflixgpt",
     "public": "build",
     "ignore": [
       "firebase.json",

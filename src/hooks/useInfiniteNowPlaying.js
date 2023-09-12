@@ -15,6 +15,7 @@ const useInfiniteScroll = ({ setCard, url }) => {
 
   useEffect(() => {
     getCardData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const handelInfiniteScroll = async () => {
