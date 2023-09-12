@@ -83,7 +83,7 @@ const Header = ({ path }) => {
               ))}
             </select>
           )}
-          <div className="flex flex-col w-36">
+          <div className="flex flex-col w-36 z-40">
             <div className="flex items-center">
               <img
                 className="w-10 h-10 ml-3 mt-3 cursor-pointer"

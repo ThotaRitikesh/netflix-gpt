@@ -1,18 +1,16 @@
 import React from "react";
 import MovieCard from "./MovieCard";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const MovieList = ({ title, movies, path }) => {
   const Navigate = useNavigate();
-  const hideViewMore = useSelector((store) => store.gpt.showGptSearch);
 
   return (
     movies && (
       <div className="px-6">
         <div className="flex">
-          <h1 className="text-xl md:text-2xl font-semibold py-4">{title}</h1>
-          {!hideViewMore && (
+          <h1 className="text-sm md:text-2xl font-semibold py-4">{title}</h1>
+          {path==='/gptsearch' ? " " :(
             <button
               className="m-2 my-1 text-yellow-600  hover:text-red-700"
               onClick={() => Navigate(path)}
