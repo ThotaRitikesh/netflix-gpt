@@ -4,13 +4,10 @@ import GptSearchBar from "./GptSearchBar";
 import GptMovieSuggestion from "./GptMovieSuggestion";
 import Header from "../Header";
 
-
 const GptSearchPage = () => {
-  
-
   return (
     <>
-      <Header path={'/gptsearch'} />
+      <Header path={"/gptsearch"} />
       <div className="fixed -z-20">
         <img
           className="h-screen object-cover md:h-auto"

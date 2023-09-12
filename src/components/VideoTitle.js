@@ -1,9 +1,6 @@
 import React from "react";
-// import { useSelector } from "react-redux";
 
-const VideoTitle = ({title,overview}) => {
-  // const {title,overview}=useSelector(store=>store.movies?.mainMovieDetailes)
-  // console.log(movieDetailes);
+const VideoTitle = ({ title, overview }) => {
   return (
     <div className="pt-[30%] md:pt-[15%] px-3 md:px-12 absolute bg-gradient-to-r from-black text-white w-screen aspect-video">
       <h1 className="text-xl md:text-3xl font-bold">{title}</h1>

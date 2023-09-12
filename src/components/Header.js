@@ -7,7 +7,6 @@ import { addUser, removeUser } from "../utiles/store/userSlice";
 import { LOGO, SUPPORTED_LANGUAGES } from "../utiles/constants";
 import { changeLanguage } from "../utiles/store/configSlice";
 import HeaderList from "./HeaderList";
-import { addGptMovieResults } from "../utiles/store/gptSlice";
 
 const Header = ({ path }) => {
   const [isDropdownClicked, setIsDropdownClicked] = useState(false);
@@ -17,10 +16,6 @@ const Header = ({ path }) => {
 
   const Navigate = useNavigate();
   const dispatch = useDispatch();
-
-  if (path !== "/gptsearch") {
-    dispatch(addGptMovieResults({ movieNames: null, movieResults: null }));
-  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -44,6 +39,7 @@ const Header = ({ path }) => {
       }
     });
     return () => unsubscribe();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleSignout = () => {

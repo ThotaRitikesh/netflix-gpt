@@ -14,6 +14,7 @@ const Body = () => {
     {
       path: "/",
       element: <Login />,
+      errorElement:<ErrorPage/>
     },
     {
       path: "/browse",

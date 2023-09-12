@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import Header from "../Header";
 import { validate } from "../../utiles/validate";
 import { auth } from "../../utiles/firebase";
 import {
@@ -9,7 +8,7 @@ import {
 } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../utiles/store/userSlice";
-import { BG_IMG_URL, PHOTO_URL } from "../../utiles/constants";
+import { BG_IMG_URL, LOGO, PHOTO_URL } from "../../utiles/constants";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -21,8 +20,6 @@ const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
   const name = useRef(null);
-
-  // const provider = new GoogleAuthProvider();
 
   const handleButton = () => {
     const message = validate(
@@ -48,7 +45,6 @@ const Login = () => {
           })
             .then(() => {
               // Profile updated!
-              // ...
               const { uid, email, displayName, photoURL } = auth.currentUser;
               dispatch(
                 addUser({
@@ -68,7 +64,6 @@ const Login = () => {
           // const errorCode = error.code;
           // const errorMessage = error.message;
           setErrorMessage("Email already used");
-          // ..
         });
     } else {
       signInWithEmailAndPassword(
@@ -78,9 +73,8 @@ const Login = () => {
       )
         .then((userCredential) => {
           // Signed in
-          const user = userCredential.user;
+          // const user = userCredential.user;
           Navigate("/browse");
-          // ...
         })
         .catch((error) => {
           // const errorCode = error.code;
@@ -96,10 +90,20 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <Header />
+    <>
+      <div className="absolute z-40">
+        <img
+          className="w-40 mx-auto md:mx-2 cursor-pointer"
+          src={LOGO}
+          alt="logo"
+        />
+      </div>
       <div className="fixed">
-        <img className="h-screen object-cover md:h-auto" src={BG_IMG_URL} alt="bg-img" />
+        <img
+          className="h-screen object-cover md:h-auto"
+          src={BG_IMG_URL}
+          alt="bg-img"
+        />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
@@ -148,7 +152,7 @@ const Login = () => {
             : "Already Registered? Sign In"}
         </p>
       </form>
-    </div>
+    </>
   );
 };
 
