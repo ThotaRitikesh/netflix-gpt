@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "../utiles/constants";
 import { addTrailerVideo } from "../utiles/store/movieSlice";
 import { useEffect } from "react";
@@ -24,6 +24,7 @@ const useMovieTrailer=(movieId)=>{
   
     useEffect(() => {
       getMovieVideo();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 }
 

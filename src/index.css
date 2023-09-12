@@ -2,11 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    overflow-x: hidden;
+body {
+  overflow-x: hidden;
 }
 
-
 .container-snap::-webkit-scrollbar {
-    display: none;
+  display: none;
 }

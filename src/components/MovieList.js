@@ -21,10 +21,10 @@ const MovieList = ({ title, movies, path }) => {
             </button>
           )}
         </div>
-        <div className="flex overflow-x-scroll container-snap">
+        <div className="flex overflow-x-scroll container-snap overflow-y-hidden">
           <div className="flex">
             {movies.map((movie) => (
-              <MovieCard key={movie?.id} poster={movie?.poster_path} />
+              <MovieCard key={movie?.id}  poster={movie?.poster_path} />
             ))}
           </div>
         </div>

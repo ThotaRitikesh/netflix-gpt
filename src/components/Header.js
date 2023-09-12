@@ -5,19 +5,22 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser, removeUser } from "../utiles/store/userSlice";
 import { LOGO, SUPPORTED_LANGUAGES } from "../utiles/constants";
-import { toggleGptSearchView } from "../utiles/store/gptSlice";
 import { changeLanguage } from "../utiles/store/configSlice";
 import HeaderList from "./HeaderList";
+import { addGptMovieResults } from "../utiles/store/gptSlice";
 
-const Header = () => {
+const Header = ({ path }) => {
   const [isDropdownClicked, setIsDropdownClicked] = useState(false);
   const user = useSelector((store) => store.user);
-  const showLangOptions = useSelector((store) => store.gpt?.showGptSearch);
 
   const lang = useRef();
 
   const Navigate = useNavigate();
   const dispatch = useDispatch();
+
+  if (path !== "/gptsearch") {
+    dispatch(addGptMovieResults({ movieNames: null, movieResults: null }));
+  }
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -54,11 +57,6 @@ const Header = () => {
       });
   };
 
-  const handleGptSearchClick = () => {
-    dispatch(toggleGptSearchView());
-    setIsDropdownClicked(!isDropdownClicked);
-  };
-
   const handleLanguageChange = () => {
     dispatch(changeLanguage(lang?.current?.value));
   };
@@ -68,46 +66,17 @@ const Header = () => {
   return (
     <div className="w-screen h-16 absolute bg-gradient-to-b from-black z-40 flex justify-between">
       <div className="flex">
-        <img className="w-40 mx-auto md:mx-2" src={LOGO} alt="logo" />
-        {user && (
-          // <ul className="text-white lg:flex gap-8 mt-5 hidden sm:hidden">
-          //               <li
-          //     className="cursor-pointer hover:text-red-700"
-          //     onClick={() => Navigate("/browse")}
-          //   >
-          //     Home
-          //   </li>
-          //   <li
-          //     className="cursor-pointer hover:text-red-700"
-          //     onClick={() => Navigate("/nowplaying")}
-          //   >
-          //     Now Playing
-          //   </li>
-          //   <li
-          //     className="cursor-pointer  hover:text-red-700"
-          //     onClick={() => Navigate("/toprated")}
-          //   >
-          //     Top Rated
-          //   </li>
-          //   <li
-          //     className="cursor-pointer  hover:text-red-700"
-          //     onClick={() => Navigate("/upcoming")}
-          //   >
-          //     UpComing Movies
-          //   </li>
-          //   <li
-          //     className="cursor-pointer  hover:text-red-700"
-          //     onClick={() => Navigate("/tvshows")}
-          //   >
-          //     TV Shows
-          //   </li>
-          // </ul>
-          <HeaderList />
-        )}
+        <img
+          className="w-40 mx-auto md:mx-2 cursor-pointer"
+          src={LOGO}
+          alt="logo"
+          onClick={() => Navigate("/browse")}
+        />
+        {user && <HeaderList />}
       </div>
       {user && (
         <div className="flex justify-between">
-          {showLangOptions && (
+          {path === "/gptsearch" && (
             <select
               className="m-4 mx-2 px-2 bg-black text-white rounded-lg"
               ref={lang}
@@ -139,9 +108,9 @@ const Header = () => {
                 </h1>
                 <button
                   className=" text-white text-opacity-60 font-bold p-2 mx-2 rounded-xl  hover:text-red-700"
-                  onClick={handleGptSearchClick}
+                  onClick={() => Navigate("/gptsearch")}
                 >
-                  {showLangOptions ? "Home Page" : "GPT Search"}
+                  GPT Search
                 </button>
                 <h1
                   className=" text-white text-opacity-60 font-bold p-2 mx-2 rounded-xl cursor-pointer  hover:text-red-700"

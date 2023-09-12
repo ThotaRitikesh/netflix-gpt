@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import openai from "../../utiles/openai";
 import { API_OPTIONS } from "../../utiles/constants";
 import { addGptMovieResults } from "../../utiles/store/gptSlice";
+import { useNavigate } from "react-router-dom";
 
 const GptSearchBar = () => {
+  const navigate=useNavigate();
   const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config?.lang);
 
@@ -33,7 +35,7 @@ const GptSearchBar = () => {
     });
 
     if (!gptResults) {
-      //error page
+      navigate('/error');
     }
 
     const gptmovies = gptResults.choices?.[0]?.message?.content.split(",");

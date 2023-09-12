@@ -6,7 +6,8 @@ import NowPlaying from "./routes/NowPlaying";
 import TopRated from "./routes/TopRated";
 import UpComing from "./routes/UpComing";
 import TvShows from "./routes/TvShows";
-import Header from "./Header";
+import GptSearchPage from "./gpt/GptSearchPage";
+import ErrorPage from "./routes/ErrorPage";
 
 const Body = () => {
   const router = createBrowserRouter([
@@ -17,6 +18,10 @@ const Body = () => {
     {
       path: "/browse",
       element: <Browse />,
+    },
+    {
+      path: "/error",
+      element: <ErrorPage />,
     },
     {
       path: "/nowplaying",
@@ -33,6 +38,10 @@ const Body = () => {
     {
       path: "/tvshows",
       element: <TvShows />,
+    },
+    {
+      path: "/gptsearch",
+      element: <GptSearchPage />,
     },
   ]);
 

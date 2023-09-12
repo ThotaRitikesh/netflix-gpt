@@ -5,7 +5,7 @@ const HeaderList = () => {
   const Navigate = useNavigate();
 
   return (
-    <ul className="text-white lg:flex gap-8 pl-3 pt-5 hidden sm:hidden bg-black">
+    <ul className="text-white lg:flex gap-8 pl-3 pt-5 hidden sm:hidden">
       <li
         className="cursor-pointer hover:text-red-700"
         onClick={() => Navigate("/browse")}
